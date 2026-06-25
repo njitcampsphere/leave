@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
-<title>请假申请 - NJIT</title>
+<title>请假</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-<!-- Open Graph / WeChat / 通用分享 -->
+<!-- Open Graph / WeChat -->
 <meta property="og:title" content="分享请假信息">
 <meta property="og:description" content="分享请假信息">
 <meta property="og:image" content="https://hh060503.github.io/leave/share-thumb.png">
@@ -18,288 +18,124 @@
 <!-- 微信专用 -->
 <meta itemprop="name" content="分享请假信息">
 <meta itemprop="description" content="分享请假信息">
-<meta itemprop="image" content="https://hh060503.github.io/leave/share-icon.svg">
+<meta itemprop="image" content="https://hh060503.github.io/leave/share-thumb.png">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body,html{
-  -webkit-overflow-scrolling:touch;
-  height:100vh;
-  padding:0!important;
-  margin:0!important;
-  font-size:14px;
-  color:#657180;
-  background:#f5f7f9;
+  -webkit-overflow-scrolling:touch;height:100vh;padding:0!important;margin:0!important;
+  font-size:14px;color:#657180;background:#f5f7f9;
   font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,Segoe UI,Arial,Roboto,PingFang SC,Hiragino Sans GB,Microsoft Yahei,sans-serif;
 }
-a{text-decoration:none}
-ul,ol{list-style:none}
+a{text-decoration:none}ul,ol{list-style:none}
 
 /* ===== Status Flag Banner ===== */
 .cat-status-flag{height:94px;font-size:0}
-.cat-status-flag .flag-dom{
-  display:flex;width:100%;height:100%;color:#fff;
-  flex-direction:column;align-items:center;justify-content:center;
-  position:relative;
-}
-.cat-status-flag .flag-dom .personal-info{
-  position:absolute;top:10px;right:20px;font-size:14px;font-style:normal;
-  cursor:pointer;
-}
-.cat-status-flag .flag-dom .status-text-bold{
-  margin-top:5px;font-size:32px;font-style:normal;font-weight:400;
-  line-height:32px;letter-spacing:4px;color:#fff;
-}
-.cat-status-flag .flag-dom .status-svg-text{
-  display:flex;margin-top:-5px;font-size:16px;font-style:normal;font-weight:400;
-  letter-spacing:2px;color:#fff;align-items:center;
-}
-.cat-status-flag .flag-dom .status-svg-text .svg-icon{
-  width:18px;height:18px;margin-right:5px;
-}
-.cat-status-flag .flag-dom .flag-text{
-  flex:1;display:flex;align-items:center;flex-direction:column;justify-content:center;
-}
-.cat-status-flag .flag-dom .no-shrink{flex-shrink:0}
-.cat-status-flag .flag-dom .dynamic-strip{
-  display:flex;width:100%;height:16px;margin:0 auto;
-  background-image:linear-gradient(135deg,#fff,#fff 25%,transparent 0,transparent 50%,#fff 0,#fff 75%,transparent 0,transparent 0);
-  background-size:60px 60px;
-  animation:move 1s linear infinite;
-  align-items:center;justify-content:center;
-}
-.cat-status-flag .flag-dom .dynamic-strip .now-time{
-  padding:0 5px;font-size:12px;color:#fff;text-align:center;
-  background:rgba(0,0,0,.5);border-radius:7px;
-}
+.cat-status-flag .flag-dom{display:flex;width:100%;height:100%;color:#fff;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.cat-status-flag .flag-dom .personal-info{position:absolute;top:10px;right:20px;font-size:14px;font-style:normal;cursor:pointer}
+.cat-status-flag .flag-dom .status-text-bold{margin-top:5px;font-size:32px;font-weight:400;line-height:32px;letter-spacing:4px;color:#fff}
+.cat-status-flag .flag-dom .status-svg-text{display:flex;margin-top:-5px;font-size:16px;font-weight:400;letter-spacing:2px;color:#fff;align-items:center}
+.cat-status-flag .flag-dom .status-svg-text .svg-icon{width:18px;height:18px;margin-right:5px}
+.cat-status-flag .flag-dom .flag-text{flex:1;display:flex;align-items:center;flex-direction:column;justify-content:center}
+.cat-status-flag .flag-dom .dynamic-strip{display:flex;width:100%;height:16px;margin:0 auto;background-image:linear-gradient(135deg,#fff,#fff 25%,transparent 0,transparent 50%,#fff 0,#fff 75%,transparent 0,transparent 0);background-size:60px 60px;animation:move 1s linear infinite;align-items:center;justify-content:center;flex-shrink:0}
+.cat-status-flag .flag-dom .dynamic-strip .now-time{padding:0 5px;font-size:12px;color:#fff;text-align:center;background:rgba(0,0,0,.5);border-radius:7px}
 .cat-status-flag .flag-warning{background:linear-gradient(180deg,#f66c08 1%,#f8aa24)}
 .cat-status-flag .flag-success{background:linear-gradient(180deg,#00a857,#00dd73)}
 .cat-status-flag .flag-error{background:linear-gradient(180deg,#f40,#f79677 97%)}
 .cat-status-flag .flag-grey{background:linear-gradient(0deg,#9ea7b4,#657180)}
-
 @keyframes move{0%{background-position:0 0}to{background-position:60px 0}}
 
 /* ===== Status Show Card ===== */
-.cat-status-show .status-show-share{
-  padding:16px 0;padding-left:0.75rem;background:#fff;
-}
-.cat-status-show .short-name{
-  width:48px;height:48px;line-height:48px;
-}
+.cat-status-show .status-show-share{padding:16px 20px;background:#fff}
+.cat-status-show .short-name{width:48px;height:48px;line-height:48px}
 
-/* ===== Common Utility Classes ===== */
-.flex{display:flex}
-.flex-1{flex:1}
-.flex-col{display:flex;flex-direction:column}
-.flex-center,.flex-col-center,.flex-row-center{display:flex;align-items:center}
-.flex-col-center{flex-direction:column}
-.flex-row-center{justify-content:center}
-.flex-wrap{flex-wrap:wrap}
-.ai-start{align-items:flex-start}
-.ai-center{align-items:center}
-.jc-center{justify-content:center}
-.jc-between{justify-content:space-between}
-.relative{position:relative}
-.absolute{position:absolute}
-.pin-t{top:0}
-.pin-r{right:0}
-.pin-l{left:0}
-.pin-b{bottom:0}
-.no-shrink{flex-shrink:0}
-.break-all{word-break:break-all}
-.text-center{text-align:center}
-.text-right{text-align:right}
-.overflow-hidden{overflow:hidden}
-.radius-small{border-radius:4px}
-.radius-normal{border-radius:8px}
-.radius-large{border-radius:16px}
-.radius-circle{border-radius:50%}
-.bold,.text-title{font-weight:700}
-.font-12{font-size:12px}
-.font-14{font-size:14px}
-.font-16{font-size:16px}
-.font-white{color:#fff}
-.font-primary,.text-link{color:#39f}
-.font-dark{color:#464c5b}
-.font-light{color:#9ea7b4}
-.font-normal{color:#657180}
-.font-success{color:#0c6}
-.font-error{color:#f40}
-.font-warning{color:#f90}
-.bg-white{background:#fff}
-.bg-grey{background:#f5f7f9}
+/* ===== Common Utilities ===== */
+.flex{display:flex}.flex-1{flex:1}.flex-col{display:flex;flex-direction:column}
+.flex-center,.flex-row-center{display:flex;align-items:center}
+.flex-center{justify-content:center}.flex-wrap{flex-wrap:wrap}
+.ai-start{align-items:flex-start}.ai-center{align-items:center}
+.jc-between{justify-content:space-between}.jc-start{justify-content:flex-start}
+.relative{position:relative}.absolute{position:absolute}
+.pin-t{top:0}.pin-r{right:0}.pin-l{left:0}
+.no-shrink{flex-shrink:0}.break-all{word-break:break-all}
+.text-center{text-align:center}.text-justify{text-align:justify}
+.radius-small{border-radius:4px}.radius-normal{border-radius:8px}.radius-circle{border-radius:50%}
+.bold{font-weight:700}
+.font-12{font-size:12px}.font-14{font-size:14px}.font-16{font-size:16px}
+.font-white{color:#fff}.font-primary{color:#39f}.font-dark{color:#464c5b}
+.font-light{color:#9ea7b4}.font-normal{color:#657180}
+.font-success{color:#0c6}.font-error{color:#f40}.font-warning{color:#f90}
+.bg-white{background:#fff}.bg-grey{background:#f5f7f9}
 
-/* Margin/Padding */
-.p-5,.pl-5,.px-5{padding-left:5px}
-.p-5,.pr-5,.px-5{padding-right:5px}
-.p-5,.pt-5,.py-5{padding-top:5px}
-.p-5,.pb-5,.py-5{padding-bottom:5px}
-.p-10,.pl-10,.px-10{padding-left:10px}
-.p-10,.pr-10,.px-10{padding-right:10px}
-.p-10,.pt-10,.py-10{padding-top:10px}
-.p-10,.pb-10,.py-10{padding-bottom:10px}
-.p-15,.pl-15,.px-15{padding-left:15px}
-.p-15,.pr-15,.px-15{padding-right:15px}
-.p-15,.pt-15,.py-15{padding-top:15px}
-.p-15,.pb-15,.py-15{padding-bottom:15px}
-.p-20,.pl-20,.px-20{padding-left:20px}
-.p-20,.pr-20,.px-20{padding-right:20px}
-.p-20,.pt-20,.py-20{padding-top:20px}
-.p-20,.pb-20,.py-20{padding-bottom:20px}
-.m-5,.ml-5,.mx-5{margin-left:5px}
-.m-5,.mr-5,.mx-5{margin-right:5px}
-.m-5,.mt-5,.my-5{margin-top:5px}
-.m-5,.mb-5,.my-5{margin-bottom:5px}
-.m-10,.ml-10,.mx-10{margin-left:10px}
-.m-10,.mr-10,.mx-10{margin-right:10px}
-.m-10,.mt-10,.my-10{margin-top:10px}
-.m-10,.mb-10,.my-10{margin-bottom:10px}
-.m-15,.ml-15,.mx-15{margin-left:15px}
-.m-15,.mr-15,.mx-15{margin-right:15px}
-.m-15,.mt-15,.my-15{margin-top:15px}
-.m-15,.mb-15,.my-15{margin-bottom:15px}
-.m-20,.ml-20,.mx-20{margin-left:20px}
-.m-20,.mr-20,.mx-20{margin-right:20px}
-.m-20,.mt-20,.my-20{margin-top:20px}
-.m-20,.mb-20,.my-20{margin-bottom:20px}
+/* Spacing */
+.px-20{padding-left:20px;padding-right:20px}.py-10{padding-top:10px;padding-bottom:10px}
+.py-15{padding-top:15px;padding-bottom:15px}
+.px-15{padding-left:15px;padding-right:15px}
+.px-10{padding-left:10px;padding-right:10px}.py-5{padding-top:5px;padding-bottom:5px}
+.pb-15{padding-bottom:15px}.pt-15{padding-top:15px}.pb-10{padding-bottom:10px}
+.mb-5{margin-bottom:5px}.mb-10{margin-bottom:10px}.mt-10{margin-top:10px}.my-10{margin-top:10px;margin-bottom:10px}
+.mr-10{margin-right:10px}.ml-5{margin-left:5px}.ml-10{margin-left:10px}.mr-5{margin-right:5px}
 .mt-auto{margin-top:auto}
-.mb-auto{margin-bottom:auto}
-.mx-auto{margin-left:auto;margin-right:auto}
-.ml-auto{margin-left:auto}
-.mr-auto{margin-right:auto}
 
-/* Hairline borders */
+/* Hairline */
 .hairline-b{position:relative}
-.hairline-b:after{
-  position:absolute;right:0;bottom:0;left:0;z-index:1;
-  width:100%;height:1px;pointer-events:none;
-  background:#e3e8ee;content:" ";transform:scaleY(.5);
-}
+.hairline-b:after{position:absolute;right:0;bottom:0;left:0;z-index:1;width:100%;height:1px;pointer-events:none;background:#e3e8ee;content:" ";transform:scaleY(.5)}
 .hairline-t{position:relative}
-.hairline-t:before{
-  position:absolute;top:0;right:0;left:0;z-index:1;
-  width:100%;height:1px;pointer-events:none;
-  background:#e3e8ee;content:" ";transform:scaleY(.5);
-}
+.hairline-t:before{position:absolute;top:0;right:0;left:0;z-index:1;width:100%;height:1px;pointer-events:none;background:#e3e8ee;content:" ";transform:scaleY(.5)}
 
-/* ===== Leave Detail Card ===== */
+/* ===== Leave Detail ===== */
 .cat-leave-detail{position:relative}
-.cat-leave-detail .audit-pass{
-  position:absolute;top:80px;right:16px;z-index:1;width:70px;
-}
-.cat-leave-detail .totalDays{
-  background:rgba(51,153,255,.1);border:1px solid #91c3fd;
-}
-
-/* ===== Extend Detail Card ===== */
-.cat-extend-detail{position:relative}
-.cat-extend-detail .audit-pass{
-  position:absolute;top:80px;right:16px;z-index:1;width:70px;
-}
-.cat-extend-detail .totalDays{
-  background:rgba(51,153,255,.1);border:1px solid #91c3fd;
-}
-
-/* ===== Complete Info ===== */
-.cat-complete-info{}
+.cat-leave-detail .totalDays{background:rgba(51,153,255,.1);border:1px solid #91c3fd}
 
 /* ===== Page Layout ===== */
 .page-share{display:flex;flex-direction:column;flex:1;height:100vh;overflow:hidden}
 
 /* ===== Personal Modal ===== */
-.cat-personal-modal{
-  position:fixed;top:0;left:0;z-index:100;
-  background:rgba(0,0,0,.5);
-}
-.cat-personal-modal .personal-info-box{
-  width:76%;max-height:70vh;background:#fff;
-}
-.cat-personal-modal .personal-info-box .row-wrap{max-height:50vh}
-.cat-personal-modal .personal-info-box .box-content-row{line-height:16px}
-.cat-personal-modal .close-icon{top:-4px;right:-4px}
+.modal-overlay{position:fixed;top:0;left:0;z-index:100;background:rgba(0,0,0,.5);width:100%;height:100%}
+.modal-overlay .modal-box{width:76%;max-height:70vh;background:#fff}
+.modal-overlay .modal-box .row-wrap{max-height:50vh;overflow-y:auto}
+.modal-overlay .modal-box .content-row{line-height:16px}
+.modal-overlay .close-icon{top:-4px;right:-4px}
 
-/* ===== Tags ===== */
-.tag-item{
-  display:inline-flex;align-items:center;padding:2px 8px;
-  font-size:12px;border-radius:4px;margin-right:8px;
-}
-
-/* ===== Flow Chart Modal ===== */
-.flow-modal-overlay{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,.5);z-index:200;
-  display:flex;align-items:center;justify-content:center;
-}
-.flow-modal{
-  width:80%;max-height:70vh;background:#fff;border-radius:8px;
-  overflow:hidden;
-}
-.flow-modal .flow-header{
-  padding:15px 20px;font-size:16px;font-weight:700;color:#464c5b;
-  text-align:center;position:relative;
-}
-.flow-modal .flow-header .close-btn{
-  position:absolute;right:15px;top:50%;transform:translateY(-50%);
-  font-size:20px;color:#9ea7b4;cursor:pointer;
-}
-.flow-modal .flow-content{
-  max-height:50vh;overflow-y:auto;padding:10px 20px 20px;
-}
-.flow-modal .flow-item{
-  display:flex;align-items:flex-start;position:relative;
-  padding:4px 0;margin:20px 0;
-}
-.flow-modal .flow-avatar{
-  border-radius:50%;width:18px;height:18px;overflow:hidden;
-  border:1px solid;flex-shrink:0;
-}
-.flow-modal .flow-line{
-  position:absolute;left:24px;width:1px;
-  height:calc(100% - 2px);top:22px;
-  background:#d7dde4;transform:translateX(-50%);
-}
-.flow-modal .flow-user{display:flex;align-items:flex-start;flex:1}
-.flow-modal .flow-time{font-size:12px;color:#9ea7b4;flex-shrink:0}
-.flow-modal .flow-approve-tip{
-  padding:5px;font-size:12px;background:#f5f7f9;
-  border:1px solid #d7dde4;border-radius:4px;
-  text-align:left;margin-top:10px;
-}
+/* ===== Flow Modal ===== */
+.flow-modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:center;justify-content:center}
+.flow-modal{width:80%;max-height:70vh;background:#fff;border-radius:8px;overflow:hidden}
+.flow-modal .flow-header{padding:15px 20px;font-size:16px;font-weight:700;color:#464c5b;text-align:center;position:relative}
+.flow-modal .flow-header .close-btn{position:absolute;right:15px;top:50%;transform:translateY(-50%);font-size:20px;color:#9ea7b4;cursor:pointer}
+.flow-modal .flow-content{max-height:50vh;overflow-y:auto;padding:10px 20px 20px}
+.flow-modal .flow-item{padding:4px 0;margin:20px 0;position:relative}
+.flow-modal .flow-avatar{border-radius:50%;width:18px;height:18px;border:1px solid}
+.flow-modal .flow-line{position:absolute;left:24px;width:1px;height:calc(100% - 2px);top:22px;background:#d7dde4;transform:translateX(-50%)}
+.flow-modal .flow-approve-tip{padding:5px;font-size:12px;background:#f5f7f9;border:1px solid #d7dde4;border-radius:4px;text-align:left;margin-top:10px}
 
 /* ===== Bottom Bar ===== */
-.bottom-bar{
-  background:#fff;padding:10px 20px;
-  box-shadow:0 -2px 8px rgba(0,0,0,.06);
-}
-.bottom-bar .btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:8px 24px;border-radius:20px;font-size:14px;
-  cursor:pointer;border:none;
-}
-.bottom-bar .btn-primary{
-  background:#39f;color:#fff;
-}
-.bottom-bar .btn-outline{
-  background:#fff;color:#39f;border:1px solid #39f;
-}
+.bottom-bar{background:#fff;padding:10px 20px;box-shadow:0 -2px 8px rgba(0,0,0,.06)}
+.bottom-bar .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 24px;border-radius:20px;font-size:14px;cursor:pointer;border:none}
+.bottom-bar .btn-primary{background:#39f;color:#fff}
+.bottom-bar .btn-outline{background:#fff;color:#39f;border:1px solid #39f}
 
-/* Responsive - for larger screens, cap the width */
-@media (min-width: 500px) {
-  body{background:#e8eaed}
-  .page-share{
-    max-width:450px;margin:0 auto;
-    box-shadow:0 0 20px rgba(0,0,0,.1);
-  }
-}
+/* ===== Tags ===== */
+.tag-item{display:inline-flex;align-items:center;padding:2px 8px;font-size:12px;border-radius:4px;margin-right:8px}
+
+/* ===== Not-out-report banner ===== */
+.not-out-report{background:#f5f7f9;font-size:12px;color:#9ea7b4;padding:6px 20px}
+
+/* ===== Responsive ===== */
+@media(min-width:500px){body{background:#e8eaed}.page-share{max-width:450px;margin:0 auto;box-shadow:0 0 20px rgba(0,0,0,.1)}}
+
+/* ===== Toast ===== */
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:999;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
 </style>
 </head>
 <body>
 <div id="app">
   <div class="page-share">
 
-    <!-- ===== Status Flag Banner ===== -->
+    <!-- ===== Status Flag Banner: flag6 = 正在休假中 ===== -->
     <div class="cat-status-flag no-shrink">
       <div class="flag-dom flag-success">
-        <span class="personal-info absolute" onclick="togglePersonalModal()">个人信息 &gt;</span>
+        <span class="personal-info" onclick="toggleModal('personalModal')">个人信息 &gt;</span>
         <div class="flag-text">
           <div class="status-svg-text">
             <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
@@ -309,22 +145,22 @@ ul,ol{list-style:none}
           </div>
           <div class="status-text-bold">正在休假中</div>
         </div>
-        <div class="dynamic-strip no-shrink">
-          <div class="now-time" id="nowTime">当前时间：2026-06-24 14:30:00</div>
+        <div class="dynamic-strip">
+          <div class="now-time" id="nowTime"></div>
         </div>
       </div>
     </div>
 
     <!-- ===== Status Show Card ===== -->
     <div class="cat-status-show no-shrink">
-      <div class="status-show-share flex ai-center px-20">
-        <div class="short-name radius-circle bg-primary flex-center font-white font-16 bold mr-10">张</div>
+      <div class="status-show-share flex ai-center">
+        <div class="short-name radius-circle flex-center font-white font-16 bold mr-10" style="background:#39f;">周</div>
         <div class="flex-1">
           <div class="flex ai-center mb-5">
-            <span class="font-dark font-14 bold">张明</span>
-            <span class="font-12 font-light ml-10">2023090112</span>
+            <span class="font-dark font-14 bold">周行</span>
+            <span class="font-12 font-light ml-10">208241330</span>
           </div>
-          <div class="font-12 font-light">计算机科学与技术 · 计科2301班</div>
+          <div class="font-12 font-light">人工智能 · 人工智能242</div>
         </div>
         <div class="no-shrink">
           <span style="display:inline-block;padding:4px 12px;background:rgba(0,204,102,.1);color:#0c6;border-radius:4px;font-size:12px;">审批通过</span>
@@ -332,287 +168,233 @@ ul,ol{list-style:none}
       </div>
     </div>
 
-    <!-- ===== Flow / Leave Meta Tags ===== -->
-    <div class="cat-flow-leave-meta no-shrink px-20 py-10 bg-white hairline-b">
-      <div class="flex flex-wrap">
-        <span class="tag-item" style="background:rgba(51,153,255,.1);color:#39f;">事假</span>
+    <!-- ===== Leave Meta Tags ===== -->
+    <div class="no-shrink px-20 py-10 bg-white hairline-b">
+      <div class="flex flex-wrap ai-center">
+        <span class="tag-item" style="background:rgba(51,153,255,.1);color:#39f;">外出请假</span>
         <span class="tag-item" style="background:rgba(255,153,0,.1);color:#f90;">离校</span>
-        <span class="tag-item" style="background:rgba(0,204,102,.1);color:#0c6;">3天</span>
+        <span class="tag-item" style="background:rgba(0,204,102,.1);color:#0c6;">1天23小时58分钟</span>
       </div>
+    </div>
+
+    <!-- ===== Not-out-report banner ===== -->
+    <div class="not-out-report flex ai-center">
+      <span>管理员 陈培杰 已设置免外出报告，无需销假</span>
     </div>
 
     <!-- ===== Leave Detail Card ===== -->
     <div class="cat-leave-detail hairline-b hairline-t px-20 bg-white py-10 my-10">
-      <!-- Title -->
-      <div class="font-dark font-14 mb-10">张明 请假申请</div>
+      <div class="font-dark font-14 mb-10">周行 请假申请</div>
 
-      <!-- Time rows -->
+      <!-- Time -->
       <div class="flex mb-5 font-12 ai-center relative">
-        <div class="totalDays absolute pin-r font-14 bold px-10 py-5 font-primary radius-small">3天</div>
+        <div class="totalDays absolute pin-r font-14 bold px-10 py-5 font-primary radius-small">1天23小时58分钟</div>
         <div class="font-light no-shrink" style="width:76px;">开始时间：</div>
-        <div class="font-normal flex-1 ml-5 bold">2026-06-25 08:00</div>
+        <div class="font-normal flex-1 ml-5 bold">06-24 16:52</div>
       </div>
       <div class="flex mb-5 font-12 ai-center">
         <div class="font-light no-shrink" style="width:76px;">结束时间：</div>
-        <div class="font-normal flex-1 ml-5 bold">2026-06-27 18:00</div>
+        <div class="font-normal flex-1 ml-5 bold">06-26 16:50</div>
       </div>
 
       <!-- Approval flow -->
       <div class="flex mb-5 font-12 ai-center">
         <div class="font-light no-shrink" style="width:76px;">审批流程：</div>
         <div class="font-normal flex-1 ml-5">
-          共2步
-          <span class="font-primary" style="cursor:pointer" onclick="toggleFlowModal()">查看&gt;</span>
+          共1步
+          <span class="font-primary" style="cursor:pointer" onclick="toggleModal('flowModal')">查看&gt;</span>
         </div>
       </div>
 
       <!-- Emergency contact -->
       <div class="flex mb-5 font-12 ai-center">
         <div class="font-light no-shrink" style="width:76px;">紧急联系人：</div>
-        <div class="font-normal flex-1 ml-5">138****6789</div>
+        <div class="font-normal flex-1 ml-5">13338089400</div>
+      </div>
+
+      <!-- Approver (shared page shows this) -->
+      <div class="flex mb-5 font-12 ai-start">
+        <div class="font-light no-shrink" style="width:76px;">审批人：</div>
+        <div class="font-normal flex-1 ml-5 break-all">庾荷霄</div>
       </div>
 
       <!-- Leave reason -->
       <div class="flex mb-5 font-12 ai-start">
         <div class="font-light no-shrink" style="width:76px;">请假原因：</div>
-        <div class="font-normal flex-1 ml-5 break-all">家中有事需回家处理，已与家长沟通确认。</div>
-      </div>
-
-      <!-- Night return -->
-      <div class="flex mb-5 font-12 ai-start">
-        <div class="font-light no-shrink" style="width:76px;">晚上是否归寝：</div>
-        <div class="font-normal flex-1 ml-5 break-all">否</div>
+        <div class="font-normal flex-1 ml-5 break-all">有事回家，有事回家。</div>
       </div>
 
       <!-- Location -->
       <div class="flex mb-5 font-12 ai-center">
         <div class="font-light no-shrink" style="width:76px;">发起位置：</div>
         <div class="font-normal flex-1 ml-5">
-          <span style="color:#39f;cursor:pointer">江苏省南京市江宁区弘景大道1号</span>
+          <span style="color:#39f;cursor:pointer">中国江苏省南京市江宁区淳化街道荟萃路</span>
         </div>
       </div>
 
-      <!-- CC people -->
+      <!-- CC -->
       <div class="flex mb-5 font-12 ai-center">
         <div class="font-light no-shrink" style="width:76px;">抄送人：</div>
-        <div class="font-normal flex-1 ml-5">已选择2人<span style="color:#2D8CF0"> 查看 &gt;</span></div>
+        <div class="font-normal flex-1 ml-5">无</div>
       </div>
 
       <!-- Destination -->
       <div class="flex mb-5 font-12 ai-start">
         <div class="font-light no-shrink" style="width:76px;">目的地：</div>
-        <div class="font-normal flex-1 ml-5 break-all">江苏省南京市江宁区</div>
+        <div class="font-normal flex-1 ml-5 break-all">江苏省/南通市/海安市/江苏南通海安城东镇界墩村二十四组</div>
       </div>
 
-      <!-- Dormitory info -->
+      <!-- Dormitory -->
       <div class="flex mb-5 font-12 ai-start">
         <div class="font-light no-shrink" style="width:76px;">宿舍信息：</div>
-        <div class="font-normal flex-1 ml-5 break-all">北苑01栋 301室</div>
+        <div class="font-normal flex-1 ml-5 break-all">-</div>
       </div>
 
-      <!-- Custom holiday fields -->
-      <div class="mb-5 font-12 font-normal break-all">
-        <span class="font-light">交通工具：</span>
-        <span>高铁</span>
-      </div>
-      <div class="mb-5 font-12 font-normal break-all">
-        <span class="font-light">家长知情：</span>
-        <span>是</span>
+      <!-- Disclaimer -->
+      <div class="flex mb-5 font-12 ai-start font-warning text-justify break-all">
+        本人承诺填写的信息真实有效，并对本次提交请假申请的信息真实性负责。
       </div>
 
       <!-- Attachments -->
-      <div class="flex mb-5 font-12 ai-start">
+      <div class="flex font-12 ai-start">
         <div class="font-light no-shrink" style="width:76px;">附件：</div>
-        <div class="font-normal flex-1 ml-5 flex-col">
-          <div class="flex flex-wrap">
-            <div style="width:50px;height:50px;background:#e3e8ee;border-radius:4px;margin-right:5px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#9ea7b4;">📄</div>
+        <div class="font-normal flex-1 ml-5">
+          <div class="flex flex-wrap" style="gap:5px;">
+            <div style="width:50px;height:50px;background:#e8f0fe;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#39f;">📎</div>
+            <div style="width:50px;height:50px;background:#e8f0fe;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#39f;">📎</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ===== Report Back Info Card ===== -->
-    <div class="cat-complete-info bg-white px-20 py-10 mb-10 hairline-b hairline-t">
-      <div class="font-dark font-14 mb-10">销假信息</div>
-
-      <div class="flex font-12 mb-5">
-        <div class="font-light no-shrink" style="width:76px;">销假状态：</div>
-        <div class="flex flex-1 ml-5 font-primary">
-          <span class="font-success">已完成</span>
-        </div>
-      </div>
-
-      <div class="flex font-12 mb-5">
-        <div class="font-light no-shrink" style="width:76px;">销假说明：</div>
-        <div class="font-normal flex flex-1 ml-5">已按时返校，正常上课。</div>
-      </div>
-
-      <div class="flex font-12 mb-5 mt-10">
-        <div class="font-light no-shrink" style="width:76px;">所在位置：</div>
-        <div class="flex flex-1 ml-5 font-primary">江苏省南京市江宁区弘景大道1号</div>
-      </div>
-    </div>
-
-    <!-- ===== Bottom Action Bar ===== -->
+    <!-- ===== Bottom Bar ===== -->
     <div class="bottom-bar mt-auto no-shrink">
       <div class="flex ai-center jc-center" style="gap:12px;">
         <button class="btn btn-outline" onclick="copyLink()">复制链接</button>
         <button class="btn btn-primary" onclick="sharePage()">分享好友</button>
       </div>
     </div>
-
   </div>
 </div>
 
 <!-- ===== Personal Info Modal ===== -->
-<div class="cat-personal-modal flex-center flex-1 h-screen" id="personalModal" style="display:none;width:100%;height:100%;position:fixed;top:0;left:0;z-index:100;background:rgba(0,0,0,.5);">
-  <div class="personal-info-box px-15 py-15 radius-normal overflow-hidden" style="background:#fff;width:76%;max-height:70vh;overflow:hidden;display:flex;flex-direction:column;">
-    <div class="font-16 font-normal text-center pb-15 relative" style="flex-shrink:0;">
-      <span class="font-bold" style="font-size:16px;color:#464c5b;">个人信息</span>
-      <span class="absolute close-icon" onclick="togglePersonalModal()" style="position:absolute;right:0;top:0;font-size:18px;color:#657180;cursor:pointer;line-height:1;">✕</span>
+<div class="modal-overlay flex-center" id="personalModal" style="display:none;" onclick="if(event.target===this)toggleModal('personalModal')">
+  <div class="modal-box px-15 py-15 radius-normal overflow-hidden" style="display:flex;flex-direction:column;">
+    <div class="font-16 text-center pb-15 relative" style="flex-shrink:0;">
+      <span class="bold" style="color:#464c5b;">个人信息</span>
+      <span class="absolute close-icon" onclick="toggleModal('personalModal')" style="right:0;top:0;font-size:18px;color:#657180;cursor:pointer;line-height:1;">✕</span>
     </div>
-    <div style="overflow-y:auto;flex:1;">
-      <div class="row-wrap" style="font-size:14px;line-height:1.6;">
-        <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start" style="font-weight:normal;">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 照片：</div>
-          <div style="width:70px;height:106px;background:#f0f0f0;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#9ea7b4;font-size:12px;">证件照</div>
-        </div>
-        <div class="box-content-row font-14 font-normal flex mb-10 ai-start">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 姓名：</div>
-          <div class="content-row-value flex-1" style="color:#464c5b;">张明</div>
-        </div>
-        <div class="box-content-row font-14 font-normal flex mb-10 ai-start">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 学号：</div>
-          <div class="content-row-value flex-1" style="color:#464c5b;">2023090112</div>
-        </div>
-        <div class="box-content-row font-14 font-normal flex mb-10 ai-start">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 性别：</div>
-          <div class="content-row-value flex-1" style="color:#464c5b;">男</div>
-        </div>
-        <div class="box-content-row font-14 font-normal flex mb-10 ai-start">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 年级：</div>
-          <div class="content-row-value flex-1" style="color:#464c5b;">2023级</div>
-        </div>
-        <div class="box-content-row font-14 font-normal flex mb-10 ai-start">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 学院：</div>
-          <div class="content-row-value flex-1" style="color:#464c5b;">计算机与信息工程学院</div>
-        </div>
-        <div class="box-content-row font-14 font-normal flex mb-10 ai-start">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 专业：</div>
-          <div class="content-row-value flex-1" style="color:#464c5b;">计算机科学与技术</div>
-        </div>
-        <div class="box-content-row font-14 font-normal flex mb-10 ai-start">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 班级：</div>
-          <div class="content-row-value flex-1" style="color:#464c5b;">计科2301班</div>
-        </div>
-        <div class="box-content-row font-14 font-normal flex mb-10 ai-start">
-          <div class="content-row-label mr-5 no-shrink" style="color:#657180;">• 宿舍：</div>
-          <div class="content-row-value flex-1" style="color:#464c5b;">北苑01栋 301室</div>
-        </div>
+    <div class="row-wrap">
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 照片：</span>
+        <span style="color:#9ea7b4;">-</span>
+      </div>
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 姓名：</span>
+        <span style="color:#464c5b;">周行</span>
+      </div>
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 学号：</span>
+        <span style="color:#464c5b;">208241330</span>
+      </div>
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 性别：</span>
+        <span style="color:#464c5b;">男</span>
+      </div>
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 年级：</span>
+        <span style="color:#464c5b;">2024级</span>
+      </div>
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 学院：</span>
+        <span style="color:#464c5b;">通信与信息工程学院、集成电路学院</span>
+      </div>
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 专业：</span>
+        <span style="color:#464c5b;">人工智能</span>
+      </div>
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 班级：</span>
+        <span style="color:#464c5b;">人工智能242</span>
+      </div>
+      <div class="content-row font-14 flex mb-10 ai-start">
+        <span class="mr-5 no-shrink" style="color:#657180;">• 宿舍：</span>
+        <span style="color:#464c5b;">东区-E06-E06B114-3</span>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ===== Flow Chart Modal ===== -->
-<div class="flow-modal-overlay" id="flowModal" style="display:none;" onclick="if(event.target===this)toggleFlowModal()">
+<div class="flow-modal-overlay" id="flowModal" style="display:none;" onclick="if(event.target===this)toggleModal('flowModal')">
   <div class="flow-modal">
     <div class="flow-header hairline-b">
       审批流程
-      <span class="close-btn" onclick="toggleFlowModal()">✕</span>
+      <span class="close-btn" onclick="toggleModal('flowModal')">✕</span>
     </div>
     <div class="flow-content">
-      <!-- Step 1: 辅导员审批 -->
-      <div style="margin-bottom:16px;">
-        <div style="font-size:12px;color:#9ea7b4;margin-bottom:8px;">第1步</div>
-        <div class="flow-item flex ai-start w-full flex-1 px-15 relative">
-          <div class="flow-avatar mr-5 no-shrink" style="border-color:#f90;"></div>
-          <div class="flex-col flex-1">
-            <div class="flex">
-              <div class="flex-1">
-                <div class="flex jc-start font-12">
-                  <span style="color:#657180;">辅导员-王老师</span>
-                  <span style="color:#f90;margin-left:5px;">- 审批 通过</span>
-                </div>
-              </div>
-              <div class="font-light font-12 no-shrink">2026-06-24 10:15</div>
+      <div class="flow-item flex ai-start relative">
+        <div class="flow-avatar mr-5 no-shrink" style="border-color:#f90;background:#fff;"></div>
+        <div class="flex-col flex-1">
+          <div class="flex jc-between">
+            <div class="jc-start font-12">
+              <span style="color:#657180;">辅导员-庾荷霄</span>
+              <span style="color:#f90;margin-left:5px;">- 审批 通过</span>
             </div>
-            <div class="flow-approve-tip">审批意见：同意请假，注意安全，按时返校。</div>
+            <div class="font-light font-12 no-shrink">06-24 20:53</div>
           </div>
-        </div>
-      </div>
-
-      <!-- Step 2: 学院审批 -->
-      <div>
-        <div style="font-size:12px;color:#9ea7b4;margin-bottom:8px;">第2步</div>
-        <div class="flow-item flex ai-start w-full flex-1 px-15 relative">
-          <div class="flow-avatar mr-5 no-shrink" style="border-color:#0c6;"></div>
-          <div class="flex-col flex-1">
-            <div class="flex">
-              <div class="flex-1">
-                <div class="flex jc-start font-12">
-                  <span style="color:#657180;">学院副书记-李老师</span>
-                  <span style="color:#0c6;margin-left:5px;">- 审批 通过</span>
-                </div>
-              </div>
-              <div class="font-light font-12 no-shrink">2026-06-24 14:30</div>
-            </div>
-            <div class="flow-approve-tip">审批意见：同意。</div>
-          </div>
+          <div class="flow-approve-tip">审批意见：无</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
+
 <script>
-// Update clock
+// Live clock
 function updateClock(){
-  var now = new Date();
-  var y = now.getFullYear();
-  var M = ('0'+(now.getMonth()+1)).slice(-2);
-  var d = ('0'+now.getDate()).slice(-2);
-  var h = ('0'+now.getHours()).slice(-2);
-  var m = ('0'+now.getMinutes()).slice(-2);
-  var s = ('0'+now.getSeconds()).slice(-2);
-  document.getElementById('nowTime').textContent = '当前时间：'+y+'-'+M+'-'+d+' '+h+':'+m+':'+s;
+  var n=new Date(),
+      y=n.getFullYear(),
+      M=('0'+(n.getMonth()+1)).slice(-2),
+      d=('0'+n.getDate()).slice(-2),
+      h=('0'+n.getHours()).slice(-2),
+      mi=('0'+n.getMinutes()).slice(-2),
+      s=('0'+n.getSeconds()).slice(-2);
+  document.getElementById('nowTime').textContent='当前时间：'+y+'-'+M+'-'+d+' '+h+':'+mi+':'+s;
 }
 updateClock();
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
 
-// Personal info modal
-function togglePersonalModal(){
-  var el = document.getElementById('personalModal');
-  el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+// Modal toggle
+function toggleModal(id){
+  var el=document.getElementById(id);
+  el.style.display=el.style.display==='none'?'flex':'none';
 }
 
-// Flow chart modal
-function toggleFlowModal(){
-  var el = document.getElementById('flowModal');
-  el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+// Toast
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show')},2000);
 }
 
 // Copy link
 function copyLink(){
-  var url = window.location.href;
+  var url='https://hh060503.github.io/leave/';
   if(navigator.clipboard){
-    navigator.clipboard.writeText(url).then(function(){
-      alert('链接已复制');
-    });
+    navigator.clipboard.writeText(url).then(function(){showToast('链接已复制')});
   }else{
-    var ta = document.createElement('textarea');
-    ta.value = url;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    alert('链接已复制');
+    var ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);showToast('链接已复制');
   }
 }
 
 // Share
 function sharePage(){
-  alert('分享功能 - 请通过微信或其他方式分享此页面');
+  showToast('请通过微信分享此页面');
 }
 </script>
 </body>
