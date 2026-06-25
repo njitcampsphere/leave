@@ -202,13 +202,13 @@ a{text-decoration:none}ul,ol{list-style:none}
 
       <!-- Time -->
       <div class="flex mb-5 font-12 ai-center relative">
-        <div class="totalDays absolute pin-r font-14 bold px-10 py-5 font-primary radius-small">1天23小时58分钟</div>
+        <div class="totalDays absolute pin-r font-14 bold px-10 py-5 font-primary radius-small" id="totalDays"></div>
         <div class="font-light no-shrink" style="width:76px;">开始时间：</div>
-        <div class="font-normal flex-1 ml-5 bold">06-25 16:52</div>
+        <div class="font-normal flex-1 ml-5 bold" id="startTime">06-25 16:52</div>
       </div>
       <div class="flex mb-5 font-12 ai-center">
         <div class="font-light no-shrink" style="width:76px;">结束时间：</div>
-        <div class="font-normal flex-1 ml-5 bold">06-29 16:50</div>
+        <div class="font-normal flex-1 ml-5 bold" id="endTime">06-29 16:50</div>
       </div>
 
       <!-- Approval flow -->
@@ -388,6 +388,26 @@ function updateClock(){
 }
 updateClock();
 setInterval(updateClock,1000);
+
+// Auto-calculate leave duration from start/end time
+function calcDuration(){
+  var s=document.getElementById('startTime').textContent.trim();
+  var e=document.getElementById('endTime').textContent.trim();
+  var now=new Date(), y=now.getFullYear();
+  var start=new Date(y+'-'+s.replace(' ','T'));
+  var end=new Date(y+'-'+e.replace(' ','T'));
+  if(end<start) end.setFullYear(y+1); // cross-year
+  var diff=end-start;
+  var days=Math.floor(diff/(1000*60*60*24));
+  var hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  var mins=Math.floor((diff%(1000*60*60))/(1000*60));
+  var parts=[];
+  if(days>0) parts.push(days+'天');
+  if(hours>0) parts.push(hours+'小时');
+  if(mins>0||parts.length===0) parts.push(mins+'分钟');
+  document.getElementById('totalDays').textContent=parts.join('');
+}
+calcDuration();
 
 // Modal toggle
 function toggleModal(id){
