@@ -168,18 +168,32 @@ a{text-decoration:none}ul,ol{list-style:none}
       </div>
     </div>
 
-    <!-- ===== Leave Meta Tags ===== -->
-    <div class="no-shrink px-20 py-10 bg-white hairline-b">
-      <div class="flex flex-wrap ai-center">
-        <span class="tag-item" style="background:rgba(51,153,255,.1);color:#39f;">外出请假</span>
-        <span class="tag-item" style="background:rgba(255,153,0,.1);color:#f90;">离校</span>
-        <span class="tag-item" style="background:rgba(0,204,102,.1);color:#0c6;">1天23小时58分钟</span>
+    <!-- ===== CatFlowLeaveMeta ===== -->
+    <div class="cat-flow-leave-meta hairline-b py-10 font-12 bg-white px-20">
+      <!-- Row 1: 请假类型 + 需要离校 -->
+      <div class="flex">
+        <div class="flex mb-5 flex-1">
+          <div class="font-light no-shrink" style="width:76px;">请假类型：</div>
+          <div class="font-normal flex-1 mr-5">外出请假</div>
+        </div>
+        <div class="flex mb-5 flex-1">
+          <div class="font-light no-shrink" style="width:76px;">需要离校：</div>
+          <div class="flex-1 mr-5 font-normal">离校</div>
+        </div>
       </div>
-    </div>
-
-    <!-- ===== Not-out-report banner ===== -->
-    <div class="not-out-report flex ai-center">
-      <span>管理员 陈培杰 已设置免外出报告，无需销假</span>
+      <!-- Row 2: 销假规则 -->
+      <div class="flex mb-5">
+        <div class="font-light no-shrink" style="width:76px;">销假规则：</div>
+        <div class="font-normal flex-1 mr-5">
+          <span class="font-warning">离校、非离校请假需要销假</span>
+          <span class="font-primary ml-5" style="cursor:pointer" onclick="toggleModal('notOutModal')">查看 &gt;</span>
+        </div>
+      </div>
+      <!-- Row 3: 实际休假时间 -->
+      <div class="flex">
+        <div class="font-light no-shrink" style="width:76px;">实际休假时间：</div>
+        <div class="font-normal flex-1 mr-5">-</div>
+      </div>
     </div>
 
     <!-- ===== Leave Detail Card ===== -->
@@ -346,6 +360,19 @@ a{text-decoration:none}ul,ol{list-style:none}
           <div class="flow-approve-tip">审批意见：无</div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NotOutReport Modal ===== -->
+<div class="flow-modal-overlay" id="notOutModal" style="display:none;" onclick="if(event.target===this)toggleModal('notOutModal')">
+  <div class="flow-modal">
+    <div class="flow-header hairline-b">
+      <b>销假规则说明</b>
+    </div>
+    <div class="p-20 font-14 font-normal flex-col">
+      <div class="mb-10">&bull; 开启时间：2023-05-22 09:23:50</div>
+      <div>&bull; 操作人： 陈培杰</div>
     </div>
   </div>
 </div>
